@@ -1,0 +1,9 @@
+[submodule "themes/nesta-theme-original"]
+	path = themes/nesta-theme-original
+	url = git://github.com/gma/nesta-theme-original.git
+[submodule "themes/nesta-theme-postal3"]
+	path = themes/nesta-theme-postal3
+	url = git://github.com/gma/nesta-theme-postal3.git
+[submodule "themes/nesta-theme-slate"]
+	path = themes/nesta-theme-slate
+	url = git://github.com/gma/nesta-theme-slate.git

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+usage()
+{
+    echo "Usage: $(basename $0) <repo-url>" 1>&2
+    exit 1
+}
+
+clone-theme()
+{
+    git submodule add $REPO themes/$THEME
+}
+
+symlink-into-releases()
+{
+    for RELEASE in releases/*; do
+        mkdir -p $RELEASE/themes
+        local dest="$RELEASE/themes/${THEME#nesta-theme-}"
+        if [ ! -e $dest ]; then
+            ln -s "../../../themes/$THEME" "$dest"
+        fi
+    done
+}
+
+## Main program
+
+[ -n "$DEBUG" ] && set -x
+
+ROOT="$(echo $(cd $(dirname $0)/..; pwd))"
+
+REPO="$1"
+[ -z "$REPO" ] && usage
+
+THEME="${REPO##*/}"
+THEME="${THEME%.git}"
+
+cd "$ROOT"
+
+mkdir -p "$ROOT/themes"
+clone-theme
+symlink-into-releases

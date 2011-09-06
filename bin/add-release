@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd $(dirname $(dirname $0))/releases
+
+RELEASE="$(nesta -v | cut -f 2 -d ' ')"
+
+nesta new $RELEASE
+
+echo "releases/$RELEASE/config/config.yml" >> .git/info/exclude
