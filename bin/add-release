@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd $(dirname $(dirname $0))/releases
+cd $(cd $(dirname $0)/..; pwd)
 
 RELEASE="$(nesta -v | cut -f 2 -d ' ')"
 
-nesta new $RELEASE
+nesta new "releases/$RELEASE"
 
 echo "releases/$RELEASE/config/config.yml" >> .git/info/exclude
