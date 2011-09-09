@@ -15,11 +15,7 @@ subtitle: "(change this text in config/config.yml)"
 #   uri: http://yourhomepage.com
 #   email: you@yourdomain.com
 
-# You can stick with the default look and feel, or use a theme. Themes are
-# easy to create or install, and live inside the themes directory. You
-# can also use scripts/theme to install them.
 #
-# theme: name-of-theme
 
 # If you want to use the Disqus service (http://disqus.com) to display
 # comments on your site, register a Disqus account and then specify your
@@ -65,3 +61,4 @@ content: content
 #   cache: true    
 #   content: /var/apps/nesta/shared/content
 #   google_analytics_code: "UA-???????-?"
+theme: slate
