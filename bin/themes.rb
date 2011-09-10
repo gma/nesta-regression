@@ -22,7 +22,8 @@ class Theme < Struct.new(:name)
 end
 
 class Tester < Struct.new(:release_path, :theme)
-  LOCAL_URL = 'http://localhost:9393'
+  LOCAL_PORT = 9394
+  LOCAL_URL = "http://localhost:#{LOCAL_PORT}"
 
   def initialize
     @failures = {}
@@ -37,7 +38,7 @@ class Tester < Struct.new(:release_path, :theme)
 
   def start_server
     puts "Starting Nesta in #{Dir.pwd}"
-    @server = IO.popen(['shotgun', 'config.ru'])
+    @server = IO.popen(%w(bundle exec shotgun config.ru -p) + [LOCAL_PORT.to_s])
     attempts = 0
     while attempts < 10
       begin

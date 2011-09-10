@@ -1,9 +1,31 @@
 #!/bin/bash
 
-cd $(cd $(dirname $0)/..; pwd)
-
+ROOT=$(cd $(dirname $0)/..; pwd)
 RELEASE="$(nesta -v | cut -f 2 -d ' ')"
 
-nesta new "releases/$RELEASE"
+## Functions
 
-echo "releases/$RELEASE/config/config.yml" >> .git/info/exclude
+create-new-release()
+{
+    nesta new "releases/$RELEASE"
+    echo "releases/$RELEASE/config/config.yml" >> .git/info/exclude
+}
+
+symlink-themes-into-release()
+{
+    local theme
+    mkdir -p "releases/$RELEASE/themes"
+    for theme in themes/*; do
+        local dest="releases/$RELEASE/themes/${theme#themes/nesta-theme-}"
+        ln -s "../../../$theme" "$dest"
+    done
+}
+
+## Main program
+
+[ -n "$DEBUG" ] && set -x
+
+cd "$ROOT"
+
+create-new-release
+symlink-themes-into-release
